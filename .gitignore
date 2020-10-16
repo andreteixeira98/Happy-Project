@@ -1,6 +1,6 @@
 # Logs
 .vscode
-
+settings.json
 /node_modules
 logs
 *.log
