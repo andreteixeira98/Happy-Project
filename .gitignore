@@ -1,4 +1,5 @@
 # Logs
+extras
 node_modules/**/*
 .expo/*
 npm-debug.*
