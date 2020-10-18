@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route} from 'react-router-dom';
-import Landing from "./pages/Landing"
+import Landing from "./pages/landing"
 import OrphanagesMap from "./pages/orphanagesMap"
-import Orphanage from './pages/Orphanage';
-import CreateOrphanage from './pages/CreateOrphanage';
+import Orphanage from './pages/orphanage';
+import CreateOrphanage from './pages/createOrphanage';
 
 
 function Routes(){

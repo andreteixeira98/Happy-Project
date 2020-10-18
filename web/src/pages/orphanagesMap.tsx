@@ -29,7 +29,7 @@ function OrphanagesMap(){
 
     console.log(orphanages);
     useEffect(() =>{
-        api.get('orphanages').then(response =>{
+        api.get('Orphanages').then(response =>{
             setOrphanages(response.data);
         })
     },[]);
@@ -56,22 +56,27 @@ function OrphanagesMap(){
                 </footer>
             </aside>
             
-                <Map center = {[-4.9610752,-39.0182078]} zoom = {15} style = {{width:'100%', height:'100%'}}>     
+                <Map 
+                center = {[-4.9715909,-39.0248505]} 
+                zoom = {15} 
+                style = {{width:'100%', height:'100%'}}
+               
+                >     
                     <TileLayer url = "https://a.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                     {orphanages.map(orphanage =>{
                         return(
                             <Marker
-                                key={orphanage.id}
-                                icon={mapIcon}
-                                position={[orphanage.latitude,orphanage.longitude]}
-                            >
-                                <Popup closeButton={false} minWidth={240} maxWidth={240} className='map-popup'>
-                                    {orphanage.name}
-                                        <Link to= {`/orphanages/${orphanage.id}`}>
-                                            <FiArrowRight  size={20} color="#FFF"/>
-                                        </Link>
-                                </Popup>
-                            </Marker>
+                            key={orphanage.id}
+                            icon={mapIcon}
+                            position={[orphanage.latitude,orphanage.longitude]}
+                        >
+                            <Popup closeButton={false} minWidth={240} maxWidth={240} className='map-popup'>
+                                {orphanage.name}
+                                    <Link to= {`/orphanages/${orphanage.id}`}>
+                                        <FiArrowRight  size={20} color="#FFF"/>
+                                    </Link>
+                            </Popup>
+                        </Marker>
                         )
                     })}
                 </Map>

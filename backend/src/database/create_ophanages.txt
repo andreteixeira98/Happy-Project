@@ -1,4 +1,9 @@
-import {MigrationInterface, QueryRunner,Table} from "typeorm";
+ yarn typeorm migration:create -n create_ophanages
+ yarn typeorm migration:create -n create_images
+ yarn typeorm migration:run
+ yarn typeorm migration:revert
+
+ import {MigrationInterface, QueryRunner,Table} from "typeorm";
 
 export class createOphanages1602616893196 implements MigrationInterface {
 
@@ -47,7 +52,11 @@ export class createOphanages1602616893196 implements MigrationInterface {
             name:'opening_on_weekends',
             type:'boolean',
             default:false
-          }
+          },
+          {
+            name:'contact',
+            type:'text'
+          },
         ]
       })  );
     }

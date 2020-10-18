@@ -18,7 +18,8 @@ interface Orphanage{
   about:string,
   instructions:string,
   opening_hours:string,
-  opening_on_weeekends:string,
+  opening_on_weekends:string,
+  contact:string,
   images: Array<{
     id:number,
     url:string,
@@ -33,9 +34,9 @@ interface OrphanageParams{
 export default function Orphanage() {
   const params = useParams<OrphanageParams>();
   const [orphanage, setOrphanage] = useState<Orphanage>();
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
   /**
-   * 
-   `${}`
+   ` `
    */
   useEffect(() =>{
     api.get(`orphanages/${params.id}`).then( response =>{
@@ -57,17 +58,33 @@ export default function Orphanage() {
 
       <main>
         <div className="orphanage-details">
-          <img src={orphanage.images[0].url} alt={orphanage.name} />
+        
 
-          <div className="images">
-           {orphanage.images.map(image =>{
-             return (
-              <button key={image.id} className='active' type='button'>
-                <img src={image.url} alt={orphanage.name}/>
-              </button>
-             );
-           })}
-          </div>
+                <img 
+                    src={orphanage.images.length > 0 ? orphanage.images[activeImageIndex].url : ''}
+                    alt={orphanage.name}
+                    title={orphanage.name }
+                  />
+
+              <div className="images">
+                  {orphanage.images.map((image,index) =>{
+                    return (
+                      <button 
+                      key={image.id} 
+                      className={((orphanage.images.length > 0) && activeImageIndex == index) ?  'active' : ' ' }
+    
+                      type='button'
+                      onClick={()=>{
+                        setActiveImageIndex(index);
+                      }}
+                      >
+                        <img src={ orphanage.images.length > 0 ? image.url : ''} alt={orphanage.name}/>
+                      </button>
+                    );
+                  })
+            
+              }
+              </div>
           
           <div className="orphanage-details-content">
             <h1>{orphanage.name}</h1>
@@ -104,7 +121,7 @@ export default function Orphanage() {
                 Segunda à Sexta <br />
                 {orphanage.opening_hours}
               </div>
-              {orphanage.opening_on_weeekends ? (
+              {orphanage.opening_on_weekends ? (
                 <div className="open-on-weekends">
                 <FiInfo size={32} color="#39CC83" />
                 Atendemos <br />
@@ -120,8 +137,10 @@ export default function Orphanage() {
             </div>
 
             <button type="button" className="contact-button">
+              <a href={`https://api.whatsapp.com/send?phone=${orphanage.contact}`} className="linkToWhatsapp">
               <FaWhatsapp size={20} color="#FFF" />
               Entrar em contato
+              </a>
             </button>
           </div>
         </div>

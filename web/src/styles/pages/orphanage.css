@@ -171,3 +171,13 @@
 .orphanage-details .orphanage-details-content button.contact-button:hover {
   background: #36CF82;
 }
+
+.orphanage-details .orphanage-details-content button.contact-button .linkToWhatsapp{
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+  align-items: center;
+  color: #FFFFFF;
+
+}

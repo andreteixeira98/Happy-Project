@@ -35,7 +35,8 @@ export default{
             about,
             instructions,
             opening_hours,
-            opening_on_weekends
+            opening_on_weekends,
+            contact,
         } = request.body;
     
         const orphanagesRepository = getRepository(Orphanage);
@@ -51,7 +52,8 @@ export default{
             about,
             instructions,
             opening_hours,
-            opening_on_weekends,
+            opening_on_weekends: (opening_on_weekends == "true"),
+            contact,
             images  
         }
 
@@ -63,12 +65,13 @@ export default{
             instructions: Yup.string().required(),
             opening_hours: Yup.string().required(),
             opening_on_weekends:Yup.boolean().required(),
+            contact: Yup.string().required(),
             images:Yup.array(
                 Yup.object().shape({
                     path:Yup.string().required()
             }))
+            
         });
-
         await schema.validate(data, {
             abortEarly: false,
         });
